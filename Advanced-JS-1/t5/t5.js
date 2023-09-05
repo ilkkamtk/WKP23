@@ -1,4 +1,5 @@
-'use strict';
+import {restaurantRow} from './components.js';
+
 const modal = document.querySelector('dialog');
 modal.addEventListener('click', () => {
   modal.close();
@@ -23,11 +24,11 @@ const fetchData = async (url, options = {}) => {
 const calculateDistance = (x1, y1, x2, y2) =>
   Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
 
-const error = err => {
+const error = (err) => {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 };
 
-const success = async pos => {
+const success = async (pos) => {
   try {
     const crd = pos.coords;
     const restaurants = await fetchData(apiUrl + '/restaurants');
@@ -45,13 +46,7 @@ const success = async pos => {
     });
 
     for (const restaurant of restaurants) {
-      const tr = document.createElement('tr');
-      const name = document.createElement('td');
-      name.innerText = restaurant.name;
-      const address = document.createElement('td');
-      address.innerText = restaurant.address;
-      tr.appendChild(name);
-      tr.appendChild(address);
+      const tr = restaurantRow(restaurant);
       document.querySelector('table').appendChild(tr);
       tr.addEventListener('click', async () => {
         try {
