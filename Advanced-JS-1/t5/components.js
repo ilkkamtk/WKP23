@@ -26,7 +26,7 @@ const restaurantModal = (restaurant, menu) => {
       <th>Price</th>
     </tr>
   `;
-  for (const course of menu.courses) {
+  menu.courses.forEach((course) => {
     const {name, diets, price} = course;
     html += `
         <tr>
@@ -35,7 +35,7 @@ const restaurantModal = (restaurant, menu) => {
           <td>${price ?? ' - '}</td>
         </tr>
         `;
-  }
+  });
   html += '</table>';
   return html;
 };
