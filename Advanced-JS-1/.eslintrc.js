@@ -11,6 +11,5 @@ module.exports = {
   },
   rules: {
     'require-jsdoc': 0,
-    'arrow-parens': [true],
   },
 };

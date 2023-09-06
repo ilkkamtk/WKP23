@@ -1,4 +1,4 @@
-import {restaurantRow} from './components.js';
+import {restaurantModal, restaurantRow} from './components.js';
 
 const modal = document.querySelector('dialog');
 modal.addEventListener('click', () => {
@@ -59,35 +59,16 @@ const success = async (pos) => {
           tr.classList.add('highlight');
           // add restaurant data to modal
           modal.innerHTML = '';
-          const html = `<h3>${restaurant.name}</h3>
-      <p>${restaurant.company}</p>
-      <p>${restaurant.address} ${restaurant.postalCode} ${restaurant.city}</p>
-      <p>${restaurant.phone}</p>`;
-          modal.insertAdjacentHTML('beforeend', html);
+
           // fetch menu
           const menu = await fetchData(
             apiUrl + `/restaurants/daily/${restaurant._id}/fi`
           );
           console.log(menu);
-          let menuHtml = `
-      <table>
-        <tr>
-          <th>Course</th>
-          <th>Diet</th>
-          <th>Price</th>
-        </tr>
-      `;
-          for (const course of menu.courses) {
-            menuHtml += `
-        <tr>
-          <td>${course.name}</td>
-          <td>${course.diets ?? ' - '}</td>
-          <td>${course.price ?? ' - '}</td>
-        </tr>
-        `;
-          }
-          menuHtml += '</table>';
+
+          const menuHtml = restaurantModal(restaurant, menu);
           modal.insertAdjacentHTML('beforeend', menuHtml);
+
           modal.showModal();
         } catch (error) {
           alert(error.message);
