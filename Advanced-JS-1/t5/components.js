@@ -40,4 +40,12 @@ const restaurantModal = (restaurant, menu) => {
   return html;
 };
 
-export {restaurantRow, restaurantModal};
+const errorModal = (message) => {
+  const html = `
+      <h3>Error</h3>
+      <p>${message}</p>
+      `;
+  return html;
+};
+
+export {restaurantRow, restaurantModal, errorModal};

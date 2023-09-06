@@ -1,4 +1,4 @@
-import {restaurantModal, restaurantRow} from './components.js';
+import {errorModal, restaurantModal, restaurantRow} from './components.js';
 import {fetchData} from './functions.js';
 import {apiUrl, positionOptions} from './variables.js';
 
@@ -38,7 +38,8 @@ const createTable = (restaurants) => {
 
         modal.showModal();
       } catch (error) {
-        alert(error.message);
+        modal.innerHTML = errorModal(error.message);
+        modal.showModal();
       }
     });
   });
@@ -90,7 +91,8 @@ const success = async (pos) => {
       createTable(restaurants);
     });
   } catch (error) {
-    alert(error.message);
+    modal.innerHTML = errorModal(error.message);
+    modal.showModal();
   }
 };
 
