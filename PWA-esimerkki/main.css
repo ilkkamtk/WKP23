@@ -1,0 +1,24 @@
+/* import Pastor of Muppets font from "Pastor of Muppets.woff2" */
+
+@font-face {
+  font-family: 'Muppets';
+  src: url('Pastor of Muppets.woff2') format('woff2');
+}
+
+body {
+  text-align: center;
+}
+
+p {
+  font-family: Muppets, sans-serif;
+  font-size: 5rem;
+}
+
+.flip {
+  display: inline-block;
+  transform: scaleX(-1);
+}
+
+img {
+  width: 100%;
+}
