@@ -158,4 +158,5 @@ avatarForm?.addEventListener('submit', async (evt) => {
 
   const avatarData = await uploadAvatar(image, token);
   console.log(avatarData);
+  checkToken();
 });
