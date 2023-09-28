@@ -68,7 +68,14 @@ const addUserDataToDom = (user: User): void => {
 };
 
 // function to get userdata from API using token
-const getUserData = async (token: string): Promise<User> => {};
+const getUserData = async (token: string): Promise<User> => {
+  const options: RequestInit = {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  };
+  return await fetchData<User>(apiUrl + '/users/token', options);
+};
 
 // TODO: function to check local storage for token and if it exists fetch
 // userdata with getUserData then update the DOM with addUserDataToDom
@@ -92,6 +99,7 @@ loginForm?.addEventListener('submit', async (evt) => {
   const loginData = await login(user);
   console.log(loginData);
   // alert(loginData.message);
+  addUserDataToDom(loginData.data);
 });
 
 // TODO: profile form event listener
