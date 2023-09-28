@@ -59,12 +59,21 @@ const updateUserData = async (
 // TODO: function to add userdata (email, username and avatar image) to the
 // Profile DOM and Edit Profile Form
 const addUserDataToDom = (user: User): void => {
-  if (!usernameTarget || !emailTarget || !avatarTarget) {
+  if (
+    !usernameTarget ||
+    !emailTarget ||
+    !avatarTarget ||
+    !profileEmailInput ||
+    !profileUsernameInput
+  ) {
     return;
   }
   usernameTarget.innerHTML = user.username;
   emailTarget.innerHTML = user.email;
   (avatarTarget as HTMLImageElement).src = uploadUrl + user.avatar;
+
+  profileEmailInput.value = user.email;
+  profileUsernameInput.value = user.username;
 };
 
 // function to get userdata from API using token
