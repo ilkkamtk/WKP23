@@ -50,6 +50,24 @@ const login = async (user: {
   return await fetchData<LoginUser>(apiUrl + '/auth/login', options);
 };
 
+// TODO: funtion to upload avatar
+const uploadAvatar = async (
+  image: File,
+  token: string
+): Promise<UploadResult> => {
+  const formData = new FormData();
+  formData.append('avatar', image);
+
+  const options: RequestInit = {
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+    body: formData,
+  };
+  return await fetchData(apiUrl + '/users/avatar', options);
+};
+
 // TODO: function to update user data
 const updateUserData = async (
   user: UpdateUser,
@@ -126,3 +144,18 @@ loginForm?.addEventListener('submit', async (evt) => {
 // TODO: avatar form event listener
 // event listener should call uploadAvatar function and update the DOM with
 // the user data by calling addUserDataToDom or checkToken
+avatarForm?.addEventListener('submit', async (evt) => {
+  evt.preventDefault();
+  if (!avatarInput?.files) {
+    return;
+  }
+  const image = avatarInput.files[0];
+
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return;
+  }
+
+  const avatarData = await uploadAvatar(image, token);
+  console.log(avatarData);
+});
