@@ -47,7 +47,7 @@ const login = async (user: {
     },
     body: JSON.stringify(user),
   };
-  return await fetchData<LoginUser>(apiUrl + '/auth/login');
+  return await fetchData<LoginUser>(apiUrl + '/auth/login', options);
 };
 
 // TODO: function to update user data
@@ -73,6 +73,18 @@ checkToken();
 // TODO: login form event listener
 // event listener should call login function and save token to local storage
 // then call addUserDataToDom to update the DOM with the user data
+loginForm?.addEventListener('submit', async (evt) => {
+  evt.preventDefault();
+  if (!usernameInput || !passwordInput) {
+    return;
+  }
+  const user = {
+    username: usernameInput.value,
+    password: passwordInput.value,
+  };
+  const loginData = await login(user);
+  console.log(loginData);
+});
 
 // TODO: profile form event listener
 // event listener should call updateUserData function and update the DOM with
