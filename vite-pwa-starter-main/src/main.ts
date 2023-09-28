@@ -79,7 +79,14 @@ const getUserData = async (token: string): Promise<User> => {
 
 // TODO: function to check local storage for token and if it exists fetch
 // userdata with getUserData then update the DOM with addUserDataToDom
-const checkToken = async (): Promise<void> => {};
+const checkToken = async (): Promise<void> => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    return;
+  }
+  const userData = await getUserData(token);
+  addUserDataToDom(userData);
+};
 
 // call checkToken on page load to check if token exists and update the DOM
 checkToken();
@@ -99,6 +106,7 @@ loginForm?.addEventListener('submit', async (evt) => {
   const loginData = await login(user);
   console.log(loginData);
   // alert(loginData.message);
+  localStorage.setItem('token', loginData.token);
   addUserDataToDom(loginData.data);
 });
 
