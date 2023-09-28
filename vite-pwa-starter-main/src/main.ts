@@ -43,7 +43,7 @@ const login = async (user: {
   const options: RequestInit = {
     method: 'POST',
     headers: {
-      contentType: 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(user),
   };
@@ -58,7 +58,14 @@ const updateUserData = async (
 
 // TODO: function to add userdata (email, username and avatar image) to the
 // Profile DOM and Edit Profile Form
-const addUserDataToDom = (user: User): void => {};
+const addUserDataToDom = (user: User): void => {
+  if (!usernameTarget || !emailTarget || !avatarTarget) {
+    return;
+  }
+  usernameTarget.innerHTML = user.username;
+  emailTarget.innerHTML = user.email;
+  (avatarTarget as HTMLImageElement).src = uploadUrl + user.avatar;
+};
 
 // function to get userdata from API using token
 const getUserData = async (token: string): Promise<User> => {};
@@ -84,6 +91,7 @@ loginForm?.addEventListener('submit', async (evt) => {
   };
   const loginData = await login(user);
   console.log(loginData);
+  // alert(loginData.message);
 });
 
 // TODO: profile form event listener
