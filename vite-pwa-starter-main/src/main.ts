@@ -1,14 +1,14 @@
 import {fetchData} from './functions';
-import {UpdateResult} from './interfaces/UpdateResult';
+// import {UpdateResult} from './interfaces/UpdateResult';
 import {UploadResult} from './interfaces/UploadResult';
-import {LoginUser, UpdateUser, User} from './interfaces/User';
+import {LoginUser, User} from './interfaces/User';
 import {apiUrl, uploadUrl} from './variables';
 
 // PWA code
 
 // select forms from the DOM
 const loginForm = document.querySelector('#login-form');
-const profileForm = document.querySelector('#profile-form');
+// const profileForm = document.querySelector('#profile-form');
 const avatarForm = document.querySelector('#avatar-form');
 
 // select inputs from the DOM
@@ -67,12 +67,13 @@ const uploadAvatar = async (
   };
   return await fetchData(apiUrl + '/users/avatar', options);
 };
-
+/*
 // TODO: function to update user data
 const updateUserData = async (
   user: UpdateUser,
   token: string
 ): Promise<UpdateResult> => {};
+*/
 
 // TODO: function to add userdata (email, username and avatar image) to the
 // Profile DOM and Edit Profile Form
