@@ -1,10 +1,28 @@
+import {pwaInfo} from 'virtual:pwa-info';
 import {fetchData} from './functions';
 // import {UpdateResult} from './interfaces/UpdateResult';
 import {UploadResult} from './interfaces/UploadResult';
 import {LoginUser, User} from './interfaces/User';
 import {apiUrl, uploadUrl} from './variables';
+import {registerSW} from 'virtual:pwa-register';
 
 // PWA code
+console.log(pwaInfo);
+
+const updateSW = registerSW({
+  immediate: true,
+  onNeedRefresh() {
+    console.log('onNeedRefresh');
+    const update = confirm('New version available. Update?');
+    if (update) {
+      updateSW(true);
+    }
+  },
+  onOfflineReady() {
+    console.log('onOfflineReady');
+    alert('App is offline ready');
+  },
+});
 
 // select forms from the DOM
 const loginForm = document.querySelector('#login-form');
