@@ -1,7 +1,13 @@
 // example.test.ts
-import { test, expect } from 'vitest';
-import { add } from '../src/example';
+import { it, expect, describe } from 'vitest';
+import { add, subtract } from '../src/example';
 
-test('add function should correctly add two numbers', () => {
-  expect(add(2, 3)).toBe(5);
+describe('Math operations', () => {
+  it('should correctly add two numbers', () => {
+    expect(add(2, 3)).toBe(5);
+  });
+
+  it('should correctly subtract two numbers', () => {
+    expect(subtract(3, 2)).toBe(1);
+  });
 });
